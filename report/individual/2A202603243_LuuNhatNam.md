@@ -7,7 +7,7 @@ Dữ liệu: 12 ảnh người và 8 ảnh khuôn mặt cắt từ COCO 2017 (Li
 - Họ tên: Lưu Nhật Nam
 - MSSV: 2A202603243
 - Email: 26ai.namln2@vinuni.edu.vn
-- Link repository: https://github.com/LuuNhatNamm/K5-L2A-Day04-LuuNhatNam-2A202603243KeypointPose-Student.git
+- Link repository: https://github.com/LuuNhatNamm/K5-L2A-Day04-LuuNhatNam-2A202603243-KeypointPose-Student
 - Phiên bản CVAT (Help → About): 2.82.0
 - Máy: hệ điều hành Windows · RAM 16 GB · chạy CVAT chế độ đầy đủ
 - Bộ ảnh (`src/exports/assignment.json` do `lab.py setup` tạo): có
