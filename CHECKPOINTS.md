@@ -6,6 +6,25 @@ Quy ước nhãn đầy đủ ở `docs/GUIDELINE.md`. Thao tác CVAT ở `docs/
 
 ---
 
+## Kết quả kiểm tra trên CVAT local
+
+Đã đối chiếu nhãn lưu trong project `d04-keypoint` với ảnh lab trên máy. Số frame bên dưới tính từ 0 như trên CVAT.
+
+| Checkpoint | Kết quả kiểm tra | Việc còn lại |
+|---|---|---|
+| CP0 | Có `src/exports/assignment.json` cho MSSV `2A202603243`. Task/Job 11 là `persons-LuuNhatNam`, Task/Job 12 là `faces-LuuNhatNam`. Label đúng tên và thứ tự, `person` có 17 điểm và 19 cạnh, `face` có 13 điểm. | Ghi phiên bản CVAT và thao tác đổi cờ từng điểm vào báo cáo. |
+| CP1 | Job 11 có 20 skeleton trên 12/12 ảnh, mỗi skeleton đủ 17 điểm. Có 257 điểm thấy, 50 điểm `occluded` và 33 điểm `outside`. Không phát hiện tọa độ ngoài ảnh ở các điểm chưa bật `outside`. | Rà lại trái/phải ở frame 4 và vị trí/cờ ở frame 8. |
+| CP2 | Job 12 có 8 skeleton trên 8/8 ảnh, mỗi ảnh đúng một skeleton đủ 13 điểm. Frame 3 có cả 8 điểm mắt đặt `occluded` sau kính râm. | Chỉnh vị trí môi ở frame 4 và rà cờ mắt bị tóc che ở frame 5. |
+| CP3 | Thư mục báo cáo hiện có mẫu `MSSV_HoTen.md`. Chưa có bảng tự review đã điền để xác nhận. | Tự review 5 ảnh người và 3 ảnh mặt, ghi ít nhất 8 dòng theo hướng dẫn CP3. |
+| CP4 | Job 11 và 12 đã chuyển sang `completed`. Đã có hai ZIP chính và bốn ảnh chụp. Script tự kiểm báo ĐẠT, 0 lỗi, 4 cảnh báo trái/phải ở file người. Hai ZIP bonus đạt, 0 lỗi, 0 cảnh báo. | Đối chiếu 4 cảnh báo và ghi kết luận ở mục 5 của báo cáo. Xuất lại nếu sửa nhãn. |
+
+- [Job 11, frame 4](http://localhost:8080/jobs/11?frame=4) · `000000297227.jpg`. Người đi xe đạp gần máy ảnh quay lưng. Chuỗi điểm `left_*` đang nằm phía phải ảnh và `right_*` phía trái ảnh trên thân và chân. Rà lại khả năng đảo trái/phải của skeleton này.
+- [Job 11, frame 8](http://localhost:8080/jobs/11?frame=8) · `000000438099.jpg`. `right_elbow` đang để là điểm thấy và nằm trên vùng ghế, cách xa người. Xem lại vị trí khuỷu và chọn `occluded` nếu ước lượng được, hoặc `outside` nếu không.
+- [Job 12, frame 4](http://localhost:8080/jobs/12?frame=4) · `face_257657.jpg`. `lip_lower` nằm thấp dưới môi. Đặt vào giữa mép ngoài môi dưới và rà lại hai khóe miệng.
+- [Job 12, frame 5](http://localhost:8080/jobs/12?frame=5) · `face_333134.jpg`. Cả 13 điểm đang để là điểm thấy. Phóng to vùng mắt bên trái ảnh và kiểm tra điểm nào thực sự bị tóc che trước khi đặt cờ.
+
+---
+
 ## CP0 — Dựng bài trên CVAT của bạn, kiểm label, xem demo (phút 5–45, 40′)
 
 - **Mục tiêu:** CVAT trên máy bạn chạy ổn, có hai task với bộ ảnh riêng của bạn, vào đúng job, chắc chắn hai label Skeleton đúng tên và đúng thứ tự trước khi gán, biết đổi cờ cho **một điểm** trên đúng bản CVAT của lớp.
@@ -28,7 +47,7 @@ Quy ước nhãn đầy đủ ở `docs/GUIDELINE.md`. Thao tác CVAT ở `docs/
 - **Sản phẩm:** `src/exports/assignment.json`; báo cáo mục **1. Kiểm tra label** đã điền đủ.
 - **Cần hiểu:** vì sao kiểm label trước khi gán (script và model đọc điểm theo tên; một tên sai làm sai cả task); vì sao mẫu `person` dựng theo người quay mặt về camera.
 - **Tự kiểm tra:**
-  - [ ] Đếm được 17 điểm trong `person` và 13 điểm trong `face`, tên khớp từng chữ với bảng trong `docs/GUIDELINE.md`.
+  - [x] Đếm được 17 điểm trong `person` và 13 điểm trong `face`, tên khớp từng chữ với bảng trong `docs/GUIDELINE.md`.
   - [ ] Thử bật `occluded` cho **một điểm** trên một skeleton nháp: chỉ điểm đó đổi kiểu hiển thị, các điểm còn lại giữ nguyên. Xóa skeleton nháp.
   - [ ] `python lab.py check` in `CVAT sẵn sàng`.
   - [ ] Đang ở trang Job (thanh địa chỉ có `/jobs/`), tên task có tên của bạn.
@@ -73,7 +92,7 @@ Quy ước nhãn đầy đủ ở `docs/GUIDELINE.md`. Thao tác CVAT ở `docs/
 - **Tự kiểm tra:**
   - [ ] Ở mặt thẳng đầu tiên, `left_eye_*` nằm bên **phải** ảnh.
   - [ ] Khóe ngoài (`*_eye_outer`) xa sống mũi hơn khóe trong (`*_eye_inner`).
-  - [ ] Ảnh kính râm: bốn điểm mắt sau tròng kính hiển thị kiểu `occluded`.
+  - [x] Ảnh kính râm: bốn điểm mắt sau tròng kính hiển thị kiểu `occluded`.
 
 ---
 
@@ -117,9 +136,9 @@ Quy ước nhãn đầy đủ ở `docs/GUIDELINE.md`. Thao tác CVAT ở `docs/
 - **Sản phẩm:** 2 file zip và `assignment.json` trong `src/exports/`; báo cáo đủ mục 0–8; 4 ảnh; hai job ở trạng thái completed.
 - **Cần hiểu:** đọc được bộ ba `(x, y, v)` trong mảng `keypoints` (`docs/COCO_KEYPOINTS.md`); vì sao tọa độ của điểm `v = 0` không được dùng (CVAT 2.x vẫn ghi tọa độ cũ, chuẩn COCO ghi `0, 0`); vì sao `num_keypoints = 0` thì người đó bị bỏ khi huấn luyện và khi chấm.
 - **Tự kiểm tra:**
-  - [ ] Script in `Kết quả: ĐẠT` (không có dòng `[LỖI]`).
-  - [ ] Script báo 12 ảnh người, 8 ảnh mặt, mỗi ảnh mặt đúng 1 skeleton.
-  - [ ] Zip không chứa ảnh (script báo lỗi nếu có).
+  - [x] Script in `Kết quả: ĐẠT` (không có dòng `[LỖI]`).
+  - [x] Script báo 12 ảnh người, 8 ảnh mặt, mỗi ảnh mặt đúng 1 skeleton.
+  - [x] Zip không chứa ảnh (script báo lỗi nếu có).
 
 ---
 

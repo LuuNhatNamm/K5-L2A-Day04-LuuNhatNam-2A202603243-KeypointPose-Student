@@ -1,0 +1,65 @@
+{
+ "mssv": "2A202603243",
+ "ten": "LuuNhatNam",
+ "pool_version": "d04-k5-v2",
+ "cvat_user": "admin",
+ "project": "d04-keypoint",
+ "persons": [
+  "000000072098.jpg",
+  "000000336477.jpg",
+  "000000343057.jpg",
+  "000000349521.jpg",
+  "000000451084.jpg",
+  "000000156986.jpg",
+  "000000189365.jpg",
+  "000000461389.jpg",
+  "000000163118.jpg",
+  "000000297227.jpg",
+  "000000438099.jpg",
+  "000000522889.jpg"
+ ],
+ "faces": [
+  "face_122747.jpg",
+  "face_125051.jpg",
+  "face_257657.jpg",
+  "face_105668.jpg",
+  "face_356144.jpg",
+  "face_504911.jpg",
+  "face_219250.jpg",
+  "face_333134.jpg"
+ ],
+ "tasks": {
+  "persons": {
+   "task_id": 11,
+   "job_id": 11,
+   "task_name": "persons-LuuNhatNam"
+  },
+  "faces": {
+   "task_id": 12,
+   "job_id": 12,
+   "task_name": "faces-LuuNhatNam"
+  },
+  "persons-extra": {
+   "task_id": 13,
+   "job_id": 13,
+   "task_name": "persons-extra-LuuNhatNam"
+  },
+  "faces-extra": {
+   "task_id": 14,
+   "job_id": 14,
+   "task_name": "faces-extra-LuuNhatNam"
+  }
+ },
+ "persons_extra": [
+  "000000254060.jpg",
+  "000000465508.jpg",
+  "000000517702.jpg"
+ ],
+ "faces_extra": [
+  "face_280788.jpg",
+  "face_300200.jpg",
+  "face_344941.jpg",
+  "face_45276.jpg",
+  "face_494518.jpg"
+ ]
+}
